@@ -665,9 +665,9 @@ KylinMsg_t kylinOdomError;
 uint8_t updateOdomError()
 {
     kylinOdomError.frame_id = kylinMsg.frame_id;
-    kylinOdomError.cbus.cp.x = txKylinMsg.cbus.cp.x - kylinMsg.cbus.cp.x;                  // + kylinOdomCalib.cbus.cp.x;
-    kylinOdomError.cbus.cp.y = txKylinMsg.cbus.cp.y - 500 - kylinMsg.cbus.cp.y;            // + kylinOdomCalib.cbus.cp.y;
-    kylinOdomError.cbus.cp.z = txKylinMsg.cbus.cp.z + ZROTATION90DEG - kylinMsg.cbus.cp.z; // + kylinOdomCalib.cbus.cp.z;
+    kylinOdomError.cbus.cp.x = txKylinMsg.cbus.cp.x - kylinMsg.cbus.cp.x; // + kylinOdomCalib.cbus.cp.x;
+    kylinOdomError.cbus.cp.y = txKylinMsg.cbus.cp.y - kylinMsg.cbus.cp.y; // + kylinOdomCalib.cbus.cp.y;
+    kylinOdomError.cbus.cp.z = txKylinMsg.cbus.cp.z - kylinMsg.cbus.cp.z; // + kylinOdomCalib.cbus.cp.z;
     //cout << "ref.x=" << txKylinMsg.cbus.cp.x << ", fdb.x=" << kylinMsg.cbus.cp.x << endl;
     //cout << "ref.y=" << txKylinMsg.cbus.cp.y << ", fdb.y=" << kylinMsg.cbus.cp.y << endl;
     kylinOdomError.cbus.gp.e = txKylinMsg.cbus.gp.e - kylinMsg.cbus.gp.e; // + kylinOdomCalib.cbus.gp.e;
@@ -1173,11 +1173,11 @@ int main(int argc, char **argv)
             txKylinMsg.cbus.fs |= 1u << 30; //切换到绝对位置控制模式
             txKylinMsg.cbus.cp.x = kylinOdomCalib.cbus.cp.x;
             txKylinMsg.cbus.cv.x = 600 * ramp;
-            txKylinMsg.cbus.cp.y = -600 + kylinOdomCalib.cbus.cp.y;
+            txKylinMsg.cbus.cp.y = -500 + kylinOdomCalib.cbus.cp.y;
             txKylinMsg.cbus.cv.y = 700 * ramp;
             if (absoluteDistance < 10)
             {
-                txKylinMsg.cbus.cp.z = 0 + kylinOdomCalib.cbus.cp.z; //1000 * PI / 2;// + kylinMsg.cbus.cp.z; //旋转90度
+                txKylinMsg.cbus.cp.z = 1572 + kylinOdomCalib.cbus.cp.z; //1000 * PI / 2;// + kylinMsg.cbus.cp.z; //旋转90度
                 txKylinMsg.cbus.cv.z = ZSPEED * ramp;
             }
             else
@@ -1395,7 +1395,7 @@ int main(int argc, char **argv)
                 {
                     txKylinMsg.cbus.cv.x = 600 * ramp;
                 }
-                txKylinMsg.cbus.cp.y = 0 + kylinOdomCalib.cbus.cp.y;
+                txKylinMsg.cbus.cp.y = -500 + kylinOdomCalib.cbus.cp.y;
                 txKylinMsg.cbus.cv.y = 700 * ramp;
                 txKylinMsg.cbus.cp.z = 0 + kylinOdomCalib.cbus.cp.z;
                 txKylinMsg.cbus.cv.z = ZSPEED;
