@@ -1177,7 +1177,7 @@ int main(int argc, char **argv)
             txKylinMsg.cbus.cv.y = 700 * ramp;
             if (absoluteDistance < 10)
             {
-                txKylinMsg.cbus.cp.z = 1572 + kylinOdomCalib.cbus.cp.z; //1000 * PI / 2;// + kylinMsg.cbus.cp.z; //旋转90度
+                txKylinMsg.cbus.cp.z = 0 + kylinOdomCalib.cbus.cp.z; //1000 * PI / 2;// + kylinMsg.cbus.cp.z; //旋转90度
                 txKylinMsg.cbus.cv.z = ZSPEED * ramp;
             }
             else
