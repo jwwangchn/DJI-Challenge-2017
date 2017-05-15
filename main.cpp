@@ -869,7 +869,7 @@ int main(int argc, char **argv)
                 finish_LR_UltrasonicFlag_PutBox = true;
                 moveDistance = 0;
             }
-            if (coutLogicFlag == 9 && kylinMsg.cbus.gp.e <= GraspBw - 15 - 210 * ((boxNum - 1) % 3) && finish_LR_UltrasonicFlag_PutBox == true)
+            if (coutLogicFlag == 9 && kylinMsg.cbus.gp.e <= GraspBw - 15 - 210 * ((boxNum - 1) % 2) && finish_LR_UltrasonicFlag_PutBox == true)
             {
                 finishSlidTpFlag_PutBox = true;
             }
@@ -1279,30 +1279,30 @@ int main(int argc, char **argv)
                 {
                     txKylinMsg.cbus.gp.e = GraspBw - 15 - 200;
                 }
+                // if (boxNum == 3)
+                // {
+                //     txKylinMsg.cbus.gp.e = GraspBw - 15 - 400;
+                // }
                 if (boxNum == 3)
                 {
-                    txKylinMsg.cbus.gp.e = GraspBw - 15 - 400;
+                    txKylinMsg.cbus.gp.e = GraspBw - 15;
                 }
                 if (boxNum == 4)
                 {
-                    txKylinMsg.cbus.gp.e = GraspBw - 15;
-                }
-                if (boxNum == 5)
-                {
                     txKylinMsg.cbus.gp.e = GraspBw - 15 - 200;
                 }
-                if (boxNum == 6)
-                {
-                    txKylinMsg.cbus.gp.e = GraspBw - 15 - 400;
-                }
-                if (boxNum == 7)
-                {
-                    txKylinMsg.cbus.gp.e = GraspBw - 15;
-                }
-                if (boxNum == 8)
-                {
-                    txKylinMsg.cbus.gp.e = GraspBw - 15 - 200;
-                }
+                // if (boxNum == 6)
+                // {
+                //     txKylinMsg.cbus.gp.e = GraspBw - 15 - 400;
+                // }
+                // if (boxNum == 7)
+                // {
+                //     txKylinMsg.cbus.gp.e = GraspBw - 15;
+                // }
+                // if (boxNum == 8)
+                // {
+                //     txKylinMsg.cbus.gp.e = GraspBw - 15 - 200;
+                // }
                 //txKylinMsg.cbus.gp.e = GraspBw - 40;
                 txKylinMsg.cbus.gv.e = 400;
                 //txKylinMsg.cbus.gp.c = GraspCl;
@@ -1327,7 +1327,7 @@ int main(int argc, char **argv)
             }
             if (finishGraspOpFlag == true)
             {
-                if (boxNum == 8)
+                if (boxNum == 4)
                 {
                     coutLogicFlag = INT_MAX - 1;
                     videoMove_PutBox2toBox1();
@@ -1338,7 +1338,7 @@ int main(int argc, char **argv)
                     putBoxNum = 2;
                     videoMove_PutBox2toBox1();
                 }
-                if (finish_PutBox2toBox1_2to1 == true || boxNum != 8)
+                if (finish_PutBox2toBox1_2to1 == true || boxNum != 4)
                 {
                     lastWs = workState;
                     rstRmp();
@@ -1365,7 +1365,7 @@ int main(int argc, char **argv)
                 txKylinMsg.cbus.cv.y = 500;
                 txKylinMsg.cbus.cp.z = 0;
                 txKylinMsg.cbus.cv.z = 0;
-                if (boxNum == 1 || boxNum == 4 || boxNum == 7)
+                if (boxNum == 1 || boxNum == 3 || boxNum == 7)
                 {
                     txKylinMsg.cbus.gp.e = GraspBw - 100 - kylinMsg.cbus.gp.e;
                     txKylinMsg.cbus.gv.e = GRASPSPEED;
@@ -1441,7 +1441,7 @@ int main(int argc, char **argv)
         default:
             break;
         }
-        if (boxNum == 9)
+        if (boxNum == 5)
         {
             missionEndTimeUs = currentTimeUs();
             cout << "mission time cost:" << (missionEndTimeUs - missionStartTimeUs) * 1e-6 << endl;
@@ -1553,7 +1553,7 @@ void videoMove_PutBox()
         txKylinMsg.cbus.gv.c = 0;
     }
     //Put the forth box
-    if (boxNum != 4 || boxNum != 7)
+    if (boxNum != 3 || boxNum != 7)
     {
         if (finish_LR_UltrasonicFlag_PutBox == true && finishSlidTpFlag_PutBox == false)
         {
@@ -1567,18 +1567,18 @@ void videoMove_PutBox()
             txKylinMsg.cbus.cp.z = 0;
             txKylinMsg.cbus.cv.z = 0;
             // int GraspPosition = (GraspTp + GraspBw)/2.0;
-            if (boxNum == 1 || boxNum == 4 || boxNum == 7)
+            if (boxNum == 1 || boxNum == 3 || boxNum == 7)
             {
                 txKylinMsg.cbus.gp.e = GraspBw - 15 - 20 - kylinMsg.cbus.gp.e;
             }
-            if (boxNum == 2 || boxNum == 5 || boxNum == 8)
+            if (boxNum == 2 || boxNum == 4 || boxNum == 8)
             {
                 txKylinMsg.cbus.gp.e = GraspBw - 15 - 220 - kylinMsg.cbus.gp.e;
             }
-            if (boxNum == 3 || boxNum == 6)
-            {
-                txKylinMsg.cbus.gp.e = GraspBw - 15 - 420 - kylinMsg.cbus.gp.e;
-            }
+            // if (boxNum == 3 || boxNum == 6)
+            // {
+            //     txKylinMsg.cbus.gp.e = GraspBw - 15 - 420 - kylinMsg.cbus.gp.e;
+            // }
             // txKylinMsg.cbus.gp.e = GraspTp - kylinMsg.cbus.gp.e
             txKylinMsg.cbus.gv.e = GRASPSPEED; //1000;
             txKylinMsg.cbus.gp.c = 0;          //抓子张开
@@ -1617,7 +1617,7 @@ void videoMove_PutBox()
             finishAbsoluteMoveFlag_Put = true;
         }
     }
-    if ((boxNum == 4 || boxNum == 7) && finish_LR_UltrasonicFlag_PutBox == true)
+    if ((boxNum == 3 || boxNum == 7) && finish_LR_UltrasonicFlag_PutBox == true)
     {
         if (finishGraspBwFlag_PutBox == true)
         {
