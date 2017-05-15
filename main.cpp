@@ -666,8 +666,8 @@ uint8_t updateOdomError()
 {
     kylinOdomError.frame_id = kylinMsg.frame_id;
     kylinOdomError.cbus.cp.x = txKylinMsg.cbus.cp.x - kylinMsg.cbus.cp.x; // + kylinOdomCalib.cbus.cp.x;
-    kylinOdomError.cbus.cp.y = txKylinMsg.cbus.cp.y - kylinMsg.cbus.cp.y; // + kylinOdomCalib.cbus.cp.y;
-    kylinOdomError.cbus.cp.z = txKylinMsg.cbus.cp.z - kylinMsg.cbus.cp.z; // + kylinOdomCalib.cbus.cp.z;
+    kylinOdomError.cbus.cp.y = txKylinMsg.cbus.cp.y - 500 - kylinMsg.cbus.cp.y; // + kylinOdomCalib.cbus.cp.y;
+    kylinOdomError.cbus.cp.z = txKylinMsg.cbus.cp.z - 1572 - kylinMsg.cbus.cp.z; // + kylinOdomCalib.cbus.cp.z;
     //cout << "ref.x=" << txKylinMsg.cbus.cp.x << ", fdb.x=" << kylinMsg.cbus.cp.x << endl;
     //cout << "ref.y=" << txKylinMsg.cbus.cp.y << ", fdb.y=" << kylinMsg.cbus.cp.y << endl;
     kylinOdomError.cbus.gp.e = txKylinMsg.cbus.gp.e - kylinMsg.cbus.gp.e; // + kylinOdomCalib.cbus.gp.e;
@@ -794,7 +794,8 @@ int main(int argc, char **argv)
     double absuluteGraspOpCl = 100;
     double absuluteGrasp = 100;
     int workState0_Num = 0, workState1_Num = 0, workState2_Num = 0, workState3_Num = 0, workState4_Num = 0;
-    
+    finishFixedUltrasonicFlag = true;
+    workState = 1;
     while ((!exit_flag)) //&&(capture.read(frame)))
     {
         //cout << "ws: " << workState << endl;
@@ -1172,7 +1173,7 @@ if (sr04maf[SR04_IDX_M].avg < CLAW_CLOSE_SONAR_TRIGGER_DISTANCE && finish_LR_Ult
             txKylinMsg.cbus.fs |= 1u << 30; //切换到绝对位置控制模式
             txKylinMsg.cbus.cp.x = kylinOdomCalib.cbus.cp.x;
             txKylinMsg.cbus.cv.x = 600 * ramp;
-            txKylinMsg.cbus.cp.y = -100 + kylinOdomCalib.cbus.cp.y;
+            txKylinMsg.cbus.cp.y = -500 + kylinOdomCalib.cbus.cp.y;
             txKylinMsg.cbus.cv.y = 700 * ramp;
             if (absoluteDistance < 10)
             {
