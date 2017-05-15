@@ -960,7 +960,7 @@ int main(int argc, char **argv)
             txKylinMsg.cbus.fs |= (1u << 30); //切换到绝对位置控制模式
             txKylinMsg.cbus.cp.x = 0 + kylinOdomCalib.cbus.cp.x;
             txKylinMsg.cbus.cv.x = 0;
-            txKylinMsg.cbus.cp.y = 500 + kylinOdomCalib.cbus.cp.y;
+            txKylinMsg.cbus.cp.y = -500 + kylinOdomCalib.cbus.cp.y;
             txKylinMsg.cbus.cv.y = 0;
             txKylinMsg.cbus.cp.z = -ZROTATION90DEG + kylinOdomCalib.cbus.cp.z; //1000 * PI / 2;// + kylinMsg.cbus.cp.z; //旋转90度
             txKylinMsg.cbus.cv.z = ZSPEED * genRmp();
