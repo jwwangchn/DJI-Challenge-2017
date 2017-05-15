@@ -1173,7 +1173,7 @@ int main(int argc, char **argv)
             txKylinMsg.cbus.fs |= 1u << 30; //切换到绝对位置控制模式
             txKylinMsg.cbus.cp.x = kylinOdomCalib.cbus.cp.x;
             txKylinMsg.cbus.cv.x = 600 * ramp;
-            txKylinMsg.cbus.cp.y = -100 + kylinOdomCalib.cbus.cp.y;
+            txKylinMsg.cbus.cp.y = -600 + kylinOdomCalib.cbus.cp.y;
             txKylinMsg.cbus.cv.y = 700 * ramp;
             if (absoluteDistance < 10)
             {
